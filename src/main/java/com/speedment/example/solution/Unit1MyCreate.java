@@ -3,6 +3,9 @@ package com.speedment.example.solution;
 import com.speedment.example.unit.Unit1Create;
 
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Random;
 import java.util.stream.IntStream;
@@ -11,42 +14,34 @@ import java.util.stream.Stream;
 public final class Unit1MyCreate implements Unit1Create {
 
     @Override
-    public Stream<String> newStreamOfAToC() {
-        return Stream.empty();
-    }
+    public Stream<String> newStreamOfAToC() { return Stream.of("A", "B", "C"); }
 
     @Override
     public IntStream newIntStreamOfOneToSeven() {
-        return IntStream.empty();
+        return IntStream.rangeClosed(1, 7);
     }
 
     @Override
     public Stream<String> from(String[] array) {
-        return Stream.empty();
+        return Arrays.stream(array);
     }
 
     @Override
     public Stream<String> from(Collection<String> collection) {
-        return Stream.empty();
+        return collection.stream();
     }
 
     @Override
     public IntStream from(String s) {
-        return IntStream.empty();
+        return s.chars();
     }
 
     @Override
-    public IntStream infiniteAlternating() {
-        return IntStream.empty();
-    }
+    public IntStream infiniteAlternating() { return IntStream.iterate(1, a -> -a); }
 
     @Override
-    public IntStream infiniteRandomInts(Random rnd) {
-        return IntStream.empty();
-    }
+    public IntStream infiniteRandomInts(Random rnd) { return rnd.ints(); }
 
     @Override
-    public Stream<String> linesFromPoemTxtFile() throws IOException {
-        return Stream.empty();
-    }
+    public Stream<String> linesFromPoemTxtFile() throws IOException { return Files.lines(Paths.get(FILE_NAME)); }
 }
